@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/camera_ui_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr">
+
+    <!-- 引导框 -->
+<!--    类似于z-index-->
+<!--    android:elevation="2dp"-->
+    <com.android.example.cameraxbasic.widget.Yindaokuang
+        android:id="@+id/ydk"
+        style="@style/Widget.Theme.AppCompat.Light.NoActionBar.MyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingClass" />
+
+    <!--    闪光灯切换按钮-->
+    <!--    位置换到之前转换前后置镜头的位置-->
+    <ImageButton
+        android:id="@+id/camera_flash_button"
+        android:layout_width="@dimen/round_button_medium"
+        android:layout_height="64dp"
+        android:layout_marginBottom="92dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/flash_camera_button_alt"
+        android:padding="@dimen/spacing_small"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:srcCompat="@drawable/ic_flash_auto" />
+
+    <ImageButton
+        android:id="@+id/camera_capture_button"
+        android:layout_width="@dimen/round_button_large"
+        android:layout_height="@dimen/round_button_large"
+        android:layout_marginBottom="@dimen/shutter_button_margin"
+        android:background="@drawable/ic_shutter"
+        android:contentDescription="@string/capture_button_alt"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageButton
+        android:id="@+id/photo_view_button"
+        android:layout_width="@dimen/round_button_medium"
+        android:layout_height="@dimen/round_button_medium"
+        android:layout_marginBottom="@dimen/margin_xlarge"
+        android:background="@drawable/ic_outer_circle"
+        android:contentDescription="@string/gallery_button_alt"
+        android:padding="@dimen/spacing_large"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_photo" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--<com.android.example.cameraxbasic.view.FocusImageView-->
+<!--android:id="@+id/focus_view"-->
+<!--android:layout_width="75dp"-->
+<!--android:layout_height="75dp"-->
+<!--app:focus_fail_id="@drawable/focus_focus_failed"-->
+<!--app:focus_focusing_id="@drawable/focus_focusing"-->
+<!--app:focus_success_id="@drawable/focus_focused"-->
+<!--/>-->
+</FrameLayout>
