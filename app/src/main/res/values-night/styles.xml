@@ -3,4 +3,5 @@
     <style name="Widget.Theme.AppCompat.Light.NoActionBar.MyView" parent="">
         <item name="android:background">@color/touming</item>
     </style>
+
 </resources>

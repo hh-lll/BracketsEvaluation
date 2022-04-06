@@ -19,9 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/camera_ui_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,17 +28,22 @@
     <!-- 引导框 -->
 <!--    类似于z-index-->
 <!--    android:elevation="2dp"-->
-    <com.android.example.cameraxbasic.widget.Yindaokuang
-        android:id="@+id/ydk"
-        style="@style/Widget.Theme.AppCompat.Light.NoActionBar.MyView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingClass" />
 
     <!--    闪光灯切换按钮-->
     <!--    位置换到之前转换前后置镜头的位置-->
+    <com.android.example.cameraxbasic.widget.Yindaokuang
+        android:id="@+id/ydk"
+        style="@style/Widget.Theme.AppCompat.Light.NoActionBar.MyView"
+        android:layout_width="150dp"
+        android:layout_height="350dp"
+        android:background="@drawable/ydk"
+        app:layout_constraintBottom_toBottomOf="@id/camera_capture_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:ignore="MissingClass" />
+
     <ImageButton
         android:id="@+id/camera_flash_button"
         android:layout_width="@dimen/round_button_medium"
@@ -78,15 +81,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/ic_photo" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--<com.android.example.cameraxbasic.view.FocusImageView-->
-<!--android:id="@+id/focus_view"-->
-<!--android:layout_width="75dp"-->
-<!--android:layout_height="75dp"-->
-<!--app:focus_fail_id="@drawable/focus_focus_failed"-->
-<!--app:focus_focusing_id="@drawable/focus_focusing"-->
-<!--app:focus_success_id="@drawable/focus_focused"-->
-<!--/>-->
 </FrameLayout>

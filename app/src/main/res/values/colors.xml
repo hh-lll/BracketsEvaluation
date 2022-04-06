@@ -15,8 +15,16 @@
   -->
 <resources>
     <color name="yindaokuang">#000000</color>
-    <color name="colorPrimary">#3F51B5</color>
+<!--    标题栏颜色-->
+    <color name="header">#5496E4</color>
+    <!--    标题栏颜色-->
+    <color name="photo_item">#6DA6E8</color>
+<!--通用颜色-->
     <color name="black">#000000</color>
+    <color name="touming">#00000000</color>
+    <color name="white">#fff</color>
+
+    <color name="colorPrimary">#3A8FFF</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="icActive">#FFFFFFFF</color>
@@ -26,5 +34,4 @@
     <color name="light_blue_600">#FF039BE5</color>
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
-    <color name="touming">#00000000</color>
 </resources>

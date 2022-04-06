@@ -18,25 +18,16 @@ package com.android.example.cameraxbasic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.content.Intent
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import com.android.example.cameraxbasic.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
-import android.view.View
-
-import android.os.Build
-
-
+import kotlinx.android.synthetic.main.activity_main1.*
 
 
 //import androidx.core.view.WindowInsetsControllerCompat
 
 private const val IMMERSIVE_FLAG_TIMEOUT = 500L
 
-class MainActivity : AppCompatActivity() {
+class MainActivity1 : AppCompatActivity() {
 
 
     private lateinit var activityMainBinding: ActivityMainBinding;
@@ -44,10 +35,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //隐藏导航栏
         supportActionBar?.hide()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main1)
         jump_to_camera.setOnClickListener {
             val intent: Intent =
-                Intent(this@MainActivity, CameraActivity::class.java)
+                Intent(this@MainActivity1, CameraActivity::class.java)
             startActivity(intent)
         }
     }

@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="app_name">CameraX Basic</string>
+    <string name="app_name">智评</string>
     <string name="capture_button_alt">Capture</string>
     <string name="switch_camera_button_alt">Switch camera</string>
     <string name="flash_camera_button_alt">Flash</string>
@@ -28,4 +28,20 @@
     <string name="delete_button_alt">Delete</string>
     <string name="delete_dialog">Delete current photo?</string>
     <string name="delete_title">Confirm</string>
+    <string name="title_activity_main">智评</string>
+    <string name="menu_item1">历史记录</string>
+    <string name="menu_item2">拍照分析</string>
+    <string name="menu_item3">知识拓展</string>
+    <string name="photo_item1">项目介绍</string>
+    <string name="photo_detail1">本项目针对传统托槽粘接教学训练中“训练教具种类单一、评估指标依赖主观、评估方式耗时耗力”三大痛点，研发具备“训练病例多元化、评分体系标准化、评估流程自动化”特点的托槽粘接教学训练系统，以期突破传统教学模式限制，推动口腔医学教育改革发展。</string>
+
+    <string name="photo_item2">使用说明</string>
+    <string name="photo_detail21">1. 本软件应搭配托槽评估基座使用；</string>
+    <string name="photo_detail22">2. 在牙齿模型上完成托槽粘接后，将模型牙齿拔下，并插在评估基座中；</string>
+    <string name="photo_detail23">3. 采用本软件对评估基座进行拍照，即可获得评分结果。</string>
+
+    <string name="his_up_front">上颌前牙评估</string>
+    <string name="his_down_front">上颌前牙评估</string>
+    <string name="his_up_back">上颌前牙评估</string>
+    <string name="his_down_back">上颌前牙评估</string>
 </resources>

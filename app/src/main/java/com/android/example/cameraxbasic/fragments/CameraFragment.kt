@@ -17,6 +17,7 @@
 package com.android.example.cameraxbasic.fragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -54,10 +55,12 @@ import com.android.example.cameraxbasic.utils.ANIMATION_SLOW_MILLIS
 import com.android.example.cameraxbasic.utils.simulateClick
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.android.synthetic.main.camera_ui_container.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
+//import com.blankj.utilcode.util.LogUtils
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.ArrayDeque
@@ -70,6 +73,9 @@ import kotlin.collections.ArrayList
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+//import com.android.example.cameraxbasic.view
+import java.util.concurrent.ExecutionException
+import kotlin.math.log
 
 
 /** Helper type alias used for analysis use case callbacks */
@@ -85,6 +91,7 @@ class CameraFragment : Fragment() {
 
     private var _fragmentCameraBinding: FragmentCameraBinding? = null
 
+    protected var mContext: Activity? = null
     private val fragmentCameraBinding get() = _fragmentCameraBinding!!
 
     private var cameraUiContainerBinding: CameraUiContainerBinding? = null
@@ -101,10 +108,12 @@ class CameraFragment : Fragment() {
     private var cameraProvider: ProcessCameraProvider? = null
     private lateinit var windowManager: WindowManager
 
+    private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
+    private lateinit var mCameraControl: CameraControl
+    private lateinit var mCameraInfo: CameraInfo
     private val displayManager by lazy {
         requireContext().getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
     }
-
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
 
@@ -206,7 +215,6 @@ class CameraFragment : Fragment() {
 
         // Determine the output directory
         outputDirectory = CameraActivity.getOutputDirectory(requireContext())
-
         // Wait for the views to be properly laid out
         fragmentCameraBinding.viewFinder.post {
 
@@ -218,6 +226,7 @@ class CameraFragment : Fragment() {
 
             // Set up the camera and its use cases
             setUpCamera()
+
         }
     }
 
@@ -239,9 +248,8 @@ class CameraFragment : Fragment() {
 
     /** Initialize CameraX, and prepare to bind the camera use cases  */
     private fun setUpCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener(Runnable {
-
             // CameraProvider
             cameraProvider = cameraProviderFuture.get()
 
@@ -305,15 +313,6 @@ class CameraFragment : Fragment() {
             // during the lifecycle of this use case
             .setTargetRotation(rotation)
             .build()
-            // The analyzer can then be assigned to the instance
-            .also {
-                it.setAnalyzer(cameraExecutor, LuminosityAnalyzer { luma ->
-                    // Values returned from our analyzer are passed to the attached listener
-                    // We log image analysis results here - you should do something useful
-                    // instead!
-                    Log.d(TAG, "Average luminosity: $luma")
-                })
-            }
 
         cameraProvider.unbindAll()
 
@@ -323,10 +322,12 @@ class CameraFragment : Fragment() {
             camera = cameraProvider.bindToLifecycle(
                 this, cameraSelector, preview, imageCapture, imageAnalyzer
             )
-
+            mCameraControl = camera!!.cameraControl
+            mCameraInfo = camera!!.cameraInfo
+            Log.i("mCameraInfo","mCameraInfo"+mCameraInfo)
             // Attach the viewfinder's surface provider to preview use case
             preview?.setSurfaceProvider(fragmentCameraBinding.viewFinder.surfaceProvider)
-            observeCameraState(camera?.cameraInfo!!)
+//            observeCameraState(camera!!.cameraInfo)
         } catch (exc: Exception) {
             Log.e(TAG, "Use case binding failed", exc)
         }
@@ -346,35 +347,35 @@ class CameraFragment : Fragment() {
                     }
                     CameraState.Type.OPENING -> {
                         // Show the Camera UI
-//                        Toast.makeText(
-//                            context,
-//                            "CameraState: Opening",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
+                        Toast.makeText(
+                            context,
+                            "CameraState: Opening",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     CameraState.Type.OPEN -> {
                         // Setup Camera resources and begin processing
-//                        Toast.makeText(
-//                            context,
-//                            "CameraState: Open",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
+                        Toast.makeText(
+                            context,
+                            "CameraState: Open",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     CameraState.Type.CLOSING -> {
                         // Close camera UI
-//                        Toast.makeText(
-//                            context,
-//                            "CameraState: Closing",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
+                        Toast.makeText(
+                            context,
+                            "CameraState: Closing",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     CameraState.Type.CLOSED -> {
                         // Free camera resources
-//                        Toast.makeText(
-//                            context,
-//                            "CameraState: Closed",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
+                        Toast.makeText(
+                            context,
+                            "CameraState: Closed",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -464,11 +465,6 @@ class CameraFragment : Fragment() {
             return AspectRatio.RATIO_4_3
         }
         return AspectRatio.RATIO_16_9
-    }
-
-    fun onTouchEvent(event: MotionEvent): Boolean {
-        cameraUiContainerBinding?.ydk?.onTouchEvent(event)
-        return true
     }
 
     /** Method used to re-draw the camera UI controls, called every time configuration changes. */
@@ -787,7 +783,7 @@ class CameraFragment : Fragment() {
                     // Values returned from our analyzer are passed to the attached listener
                     // We log image analysis results here - you should do something useful
                     // instead!
-                    Log.d(TAG, "Average luminosity: $luma")
+//                    Log.d(TAG, "Average luminosity: $luma")
                 })
             }
 
@@ -796,13 +792,14 @@ class CameraFragment : Fragment() {
         try {
             // A variable number of use-cases can be passed here -
             // camera provides access to CameraControl & CameraInfo
-            camera = cameraProvider.bindToLifecycle(
+            val camera = cameraProvider.bindToLifecycle(
                 this, cameraSelector, preview, imageCapture, imageAnalyzer
             )
-
+            mCameraInfo = camera.cameraInfo
+            mCameraControl = camera.cameraControl
             // Attach the viewfinder's surface provider to preview use case
             preview?.setSurfaceProvider(fragmentCameraBinding.viewFinder.surfaceProvider)
-            observeCameraState(camera?.cameraInfo!!)
+//            observeCameraState(camera?.cameraInfo!!)
         } catch (exc: Exception) {
             Log.e(TAG, "Use case binding failed", exc)
         }
@@ -859,7 +856,7 @@ class CameraFragment : Fragment() {
                     // Values returned from our analyzer are passed to the attached listener
                     // We log image analysis results here - you should do something useful
                     // instead!
-                    Log.d(TAG, "Average luminosity: $luma")
+//                    Log.d(TAG, "Average luminosity: $luma")
                 })
             }
 
@@ -868,19 +865,20 @@ class CameraFragment : Fragment() {
         try {
             // A variable number of use-cases can be passed here -
             // camera provides access to CameraControl & CameraInfo
-            camera = cameraProvider.bindToLifecycle(
+            val camera = cameraProvider.bindToLifecycle(
                 this, cameraSelector, preview, imageCapture, imageAnalyzer
             )
             //用来聚焦、手势、闪光灯、手电等操作
-            val mCameraInfo = camera?.cameraInfo
-            val mCameraControl = camera?.cameraControl
+            mCameraInfo = camera.cameraInfo
+            mCameraControl = camera.cameraControl
 //            initCameraListener()
             // Attach the viewfinder's surface provider to preview use case
             preview?.setSurfaceProvider(fragmentCameraBinding.viewFinder.surfaceProvider)
             //打印相机状态
-            observeCameraState(camera?.cameraInfo!!)
+//            observeCameraState(camera?.cameraInfo!!)
         } catch (exc: Exception) {
             Log.e(TAG, "Use case binding failed", exc)
         }
     }
+
 }

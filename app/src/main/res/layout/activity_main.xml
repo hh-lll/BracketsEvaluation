@@ -1,77 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    tools:context=".MainActivity">
+    >
 
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        android:background="?android:attr/windowBackground"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:menu="@menu/bottom_nav_menu"/>-->
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:text="您的正畸学习好帮手"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/jump_to_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:text="开始拍照"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+    <include
+        layout="@layout/title_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+    />
 
     <RadioGroup
-        android:id="@+id/radioGroup3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tabs_rg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabs_rg"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
         <RadioButton
-            android:id="@+id/radioButton6"
-            android:layout_width="wrap_content"
+            android:id="@+id/his_tab"
+            style="@style/Custom.TabRadioButton"
             android:layout_height="wrap_content"
-            android:autoText="false"
-            android:minHeight="60dp"
-            android:text="上颌前牙分析"
-            android:textAlignment="viewStart"
-            android:textSize="16sp" />
+            android:drawableTop="@drawable/menu_his_selector"
+            android:text="历史记录"
+            android:textSize="14sp" />
 
         <RadioButton
-            android:id="@+id/radioButton8"
-            android:layout_width="wrap_content"
+            android:id="@+id/photo_tab"
+            style="@style/Custom.TabRadioButton"
             android:layout_height="wrap_content"
-            android:minHeight="60dp"
-            android:text="上颌后牙分析"
-            android:textSize="16sp" />
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:checked="true"
+            android:drawableTop="@drawable/menu_photo_selector"
+            android:text="拍照分析" />
 
         <RadioButton
-            android:id="@+id/radioButton7"
-            android:layout_width="wrap_content"
+            android:id="@+id/know_tab"
+            style="@style/Custom.TabRadioButton"
             android:layout_height="wrap_content"
-            android:minHeight="60dp"
-            android:text="下颌前牙分析"
-            android:textSize="16sp" />
+            android:drawableTop="@drawable/menu_know_selector"
+            android:text="知识拓展" />
 
-        <RadioButton
-            android:id="@+id/radioButton9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="60dp"
-            android:text="下颌后牙分析"
-            android:textSize="16sp" />
     </RadioGroup>
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_host_fragment_activity_main"-->
+<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:defaultNavHost="true"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/tabs_rg"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0"-->
+<!--        app:navGraph="@navigation/mobile_navigation" />-->
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/tabs_rg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
