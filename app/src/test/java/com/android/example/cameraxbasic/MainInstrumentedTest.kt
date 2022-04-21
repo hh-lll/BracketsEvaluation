@@ -35,7 +35,8 @@ class MainInstrumentedTest {
             Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
 
     @get:Rule
-    val activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    val activityRule: ActivityTestRule<MainActivity12> = ActivityTestRule(
+        MainActivity12::class.java)
 
     @Test
     fun useAppContext() {

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.android.example.cameraxbasic">
+    package="com.android.example.cameraxbasic" >
     <!-- Enable instant app support -->
     <dist:module dist:instant="true" /> <!-- Declare features -->
     <uses-feature android:name="android.hardware.camera" /> <!-- Declare permissions -->
@@ -15,12 +15,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup">
+        tools:ignore="AllowBackup" >
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
         <activity
             android:name=".HistoricalDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity12"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
             android:exported="true"
@@ -30,7 +33,7 @@
             android:rotationAnimation="seamless"
             android:screenOrientation="fullUser"
             android:theme="@style/AppTheme"
-            tools:targetApi="O"> <!-- Main app intent filter -->
+            tools:targetApi="O" > <!-- Main app intent filter -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,7 +46,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter> <!-- App links for http/s -->
-            <intent-filter android:autoVerify="true">
+            <intent-filter android:autoVerify="true" >
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -66,7 +69,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />

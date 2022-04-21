@@ -38,6 +38,17 @@ import com.android.example.cameraxbasic.utils.showImmersive
 import com.android.example.cameraxbasic.R
 import com.android.example.cameraxbasic.databinding.FragmentGalleryBinding
 import java.util.Locale
+import android.content.ContentResolver
+import android.graphics.BitmapFactory
+
+import android.graphics.Bitmap
+import android.net.Uri
+import com.android.example.cameraxbasic.HistoricalDetailActivity
+import org.opencv.android.Utils
+import org.opencv.core.Mat
+import org.opencv.core.Size
+import org.opencv.imgproc.Imgproc
+
 
 val EXTENSION_WHITELIST = arrayOf("JPG")
 
@@ -90,10 +101,10 @@ class GalleryFragment internal constructor() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Checking media files list
-        if (mediaList.isEmpty()) {
-            fragmentGalleryBinding.deleteButton.isEnabled = false
-            fragmentGalleryBinding.shareButton.isEnabled = false
-        }
+//        if (mediaList.isEmpty()) {
+//            fragmentGalleryBinding.deleteButton.isEnabled = false
+//            fragmentGalleryBinding.shareButton.isEnabled = false
+//        }
 
         // Populate the ViewPager and implement a cache of two media items
         fragmentGalleryBinding.photoViewPager.apply {
@@ -113,65 +124,43 @@ class GalleryFragment internal constructor() : Fragment() {
         }
 
         // Handle share button press
-        fragmentGalleryBinding.shareButton.setOnClickListener {
+        fragmentGalleryBinding.submitButton.setOnClickListener {
 
             mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)?.let { mediaFile ->
-
-                // Create a sharing intent
-                val intent = Intent().apply {
-                    // Infer media type from file extension
-                    val mediaType = MimeTypeMap.getSingleton()
-                            .getMimeTypeFromExtension(mediaFile.extension)
-                    // Get URI from our FileProvider implementation
-                    val uri = FileProvider.getUriForFile(
-                            view.context, BuildConfig.APPLICATION_ID + ".provider", mediaFile)
-                    // Set the appropriate intent extra, type, action and flags
-                    putExtra(Intent.EXTRA_STREAM, uri)
-                    type = mediaType
-                    action = Intent.ACTION_SEND
-                    flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                }
-
-                // Launch the intent letting the user choose which app to share with
-                startActivity(Intent.createChooser(intent, getString(R.string.share_hint)))
+//                val bitmap = BitmapFactory.decodeFile(mediaFile.absolutePath)
+                var intent = Intent(activity, HistoricalDetailActivity::class.java)
+                intent.putExtra("pic_uri",mediaFile.absolutePath)
+                startActivity(intent)
+//                // Create a sharing intent
+//                val intent = Intent().apply {
+//                    // Infer media type from file extension
+//                    val mediaType = MimeTypeMap.getSingleton()
+//                            .getMimeTypeFromExtension(mediaFile.extension)
+//                    // Get URI from our FileProvider implementation
+//                    val uri = FileProvider.getUriForFile(
+//                            view.context, BuildConfig.APPLICATION_ID + ".provider", mediaFile)
+//                    // Set the appropriate intent extra, type, action and flags
+//                    putExtra(Intent.EXTRA_STREAM, uri)
+//                    type = mediaType
+//                    action = Intent.ACTION_SEND
+//                    flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                }
+//
+//                // Launch the intent letting the user choose which app to share with
+//                startActivity(Intent.createChooser(intent, getString(R.string.share_hint)))
             }
         }
 
-        // Handle delete button press
-        fragmentGalleryBinding.deleteButton.setOnClickListener {
-
-            mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)?.let { mediaFile ->
-
-                AlertDialog.Builder(view.context, android.R.style.Theme_Material_Dialog)
-                        .setTitle(getString(R.string.delete_title))
-                        .setMessage(getString(R.string.delete_dialog))
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes) { _, _ ->
-
-                            // Delete current photo
-                            mediaFile.delete()
-
-                            // Send relevant broadcast to notify other apps of deletion
-                            MediaScannerConnection.scanFile(
-                                    view.context, arrayOf(mediaFile.absolutePath), null, null)
-
-                            // Notify our view pager
-                            mediaList.removeAt(fragmentGalleryBinding.photoViewPager.currentItem)
-                            fragmentGalleryBinding.photoViewPager.adapter?.notifyDataSetChanged()
-
-                            // If all photos have been deleted, return to camera
-                            if (mediaList.isEmpty()) {
-                                Navigation.findNavController(requireActivity(), R.id.fragment_containers).navigateUp()
-                            }
-
-                        }
-
-                        .setNegativeButton(android.R.string.no, null)
-                        .create().showImmersive()
-            }
-        }
     }
 
+    //传入任意bitmap, 返回模糊过后的bitmap
+    private fun blurImage(origin: Bitmap): Bitmap? {
+        val mat = Mat()
+        Utils.bitmapToMat(origin, mat)
+        Imgproc.GaussianBlur(mat, mat, Size(15.0, 15.0), 0.0)
+        Utils.matToBitmap(mat, origin)
+        return origin
+    }
     override fun onDestroyView() {
         _fragmentGalleryBinding = null
         super.onDestroyView()

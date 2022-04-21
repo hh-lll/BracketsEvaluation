@@ -32,46 +32,69 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/back_button"
-            android:contentDescription="@string/back_button_alt"
-            app:layout_constraintTop_toTopOf="parent"
+        <com.android.example.cameraxbasic.widget.Yindaokuang
+            android:id="@+id/ydk"
+            style="@style/Widget.Theme.AppCompat.Light.NoActionBar.MyView"
+            android:layout_width="150dp"
+            android:layout_height="350dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/ydk"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginStart="@dimen/margin_xsmall"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_width="@dimen/round_button_small"
-            android:layout_height="@dimen/round_button_small"
-            android:scaleType="fitCenter"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_back" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="315dp"
+            android:rotation="-270"
+            android:rotationY="0"
+            android:text="请确认照片中基座边缘是否对齐矩形框"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/back_button"-->
+<!--            android:contentDescription="@string/back_button_alt"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            android:layout_marginStart="@dimen/margin_xsmall"-->
+<!--            android:layout_marginTop="@dimen/margin_small"-->
+<!--            android:layout_width="@dimen/round_button_small"-->
+<!--            android:layout_height="@dimen/round_button_small"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            app:srcCompat="@drawable/ic_back" />-->
 
         <ImageButton
-            android:id="@+id/share_button"
+            android:id="@+id/submit_button"
             android:contentDescription="@string/share_button_alt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginEnd="@dimen/margin_xlarge"
+            android:layout_marginEnd="152dp"
             android:layout_marginBottom="@dimen/margin_small"
-            android:layout_width="@dimen/round_button_small"
-            android:layout_height="@dimen/round_button_small"
+            android:layout_width="@dimen/round_button_medium"
+            android:layout_height="@dimen/round_button_medium"
             android:scaleType="fitCenter"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_share" />
+            app:srcCompat="@drawable/ic_confirm_submit" />
 
         <ImageButton
-            android:id="@+id/delete_button"
+            android:id="@+id/back_button"
             android:contentDescription="@string/delete_button_alt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginStart="@dimen/margin_xlarge"
+            android:layout_marginStart="152dp"
             android:layout_marginBottom="@dimen/margin_small"
-            android:layout_width="@dimen/round_button_small"
-            android:layout_height="@dimen/round_button_small"
+            android:layout_width="@dimen/round_button_medium"
+            android:layout_height="@dimen/round_button_medium"
             android:scaleType="fitCenter"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_delete" />
+            app:srcCompat="@drawable/ic_confirm_back" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

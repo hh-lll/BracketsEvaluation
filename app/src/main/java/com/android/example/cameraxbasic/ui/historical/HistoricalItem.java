@@ -1,7 +1,6 @@
 package com.android.example.cameraxbasic.ui.historical;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.android.example.cameraxbasic.HistoricalDetailActivity;
-import com.android.example.cameraxbasic.MainActivity;
 import com.android.example.cameraxbasic.R;
 
 public class HistoricalItem extends ConstraintLayout {
@@ -34,5 +31,4 @@ public class HistoricalItem extends ConstraintLayout {
         View view = LayoutInflater.from(mContext).inflate(R.layout.historical_item,null);
         addView(view);
     }
-
 }

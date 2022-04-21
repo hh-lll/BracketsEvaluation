@@ -17,21 +17,26 @@
         android:background="@color/header"
         app:qmui_topbar_title_color="@color/white"
         app:qmui_topbar_left_back_drawable_id="@drawable/goback"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         android:background="@drawable/bg"
-        android:scrollbars="none"
-        android:padding="20dp">
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/a_his_type"
                     android:layout_width="143dp"
@@ -90,7 +95,7 @@
                 android:id="@+id/a_his_pic"
                 android:layout_width="match_parent"
                 android:layout_height="103dp"
-                android:src="@drawable/menu_know_selector" />
+                android:src="@drawable/v2_r9haow" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,12 +106,13 @@
 
             <com.android.example.cameraxbasic.ui.historical.ScoreDetail
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <com.bin.david.form.core.SmartTable
                 android:id="@+id/a_his_table_score"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

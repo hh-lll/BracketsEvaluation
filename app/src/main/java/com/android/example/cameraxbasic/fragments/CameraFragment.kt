@@ -16,6 +16,7 @@
 
 package com.android.example.cameraxbasic.fragments
 
+import android.R.attr
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.BroadcastReceiver
@@ -63,8 +64,7 @@ import java.io.File
 //import com.blankj.utilcode.util.LogUtils
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
-import java.util.ArrayDeque
-import java.util.Locale
+import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -76,6 +76,17 @@ import kotlin.math.min
 //import com.android.example.cameraxbasic.view
 import java.util.concurrent.ExecutionException
 import kotlin.math.log
+import android.R.attr.delay
+import android.os.Handler
+
+import java.util.Timer
+import java.util.TimerTask
+
+
+
+
+
+
 
 
 /** Helper type alias used for analysis use case callbacks */
@@ -215,6 +226,7 @@ class CameraFragment : Fragment() {
 
         // Determine the output directory
         outputDirectory = CameraActivity.getOutputDirectory(requireContext())
+
         // Wait for the views to be properly laid out
         fragmentCameraBinding.viewFinder.post {
 
@@ -484,7 +496,7 @@ class CameraFragment : Fragment() {
         // In the background, load latest photo taken (if any) for gallery thumbnail
         lifecycleScope.launch(Dispatchers.IO) {
             outputDirectory.listFiles { file ->
-                EXTENSION_WHITELIST.contains(file.extension.toUpperCase(Locale.ROOT))
+                EXTENSION_WHITELIST.contains(file.extension.uppercase(Locale.ROOT))
             }?.maxOrNull()?.let {
                 setGalleryThumbnail(Uri.fromFile(it))
             }
@@ -551,18 +563,60 @@ class CameraFragment : Fragment() {
                         }
                     })
 
-                // We can only change the foreground Drawable using API level 23+ API
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                    // Display flash animation to indicate that photo was captured
-                    fragmentCameraBinding.root.postDelayed({
-                        fragmentCameraBinding.root.foreground = ColorDrawable(Color.WHITE)
-                        fragmentCameraBinding.root.postDelayed(
-                            { fragmentCameraBinding.root.foreground = null }, ANIMATION_FAST_MILLIS
-                        )
-                    }, ANIMATION_SLOW_MILLIS)
-                }
+//                // We can only change the foreground Drawable using API level 23+ API
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//
+//                    // Display flash animation to indicate that photo was captured
+//                    fragmentCameraBinding.root.postDelayed({
+//                        fragmentCameraBinding.root.foreground = ColorDrawable(Color.WHITE)
+//                        fragmentCameraBinding.root.postDelayed(
+//                            { fragmentCameraBinding.root.foreground = null }, ANIMATION_FAST_MILLIS
+//                        )
+//                    }, ANIMATION_SLOW_MILLIS)
+//                }
+
+
             }
+
+
+//            val timer = Timer()
+//            timer.schedule(object : TimerTask() {
+//                override fun run() {
+//                    /**
+//                     * 延时执行的代码
+//                     */
+//                    if (true == outputDirectory.listFiles()?.isNotEmpty()) {
+//                        Navigation.findNavController(
+//                            requireActivity(), R.id.fragment_containers
+//                        ).navigate(
+//                            CameraFragmentDirections
+//                                .actionCameraToGallery(outputDirectory.absolutePath)
+//                        )
+//                    }
+//                }
+//            }, 1000) // 延时1秒
+
+//             跳转到确认页
+
+            Handler().postDelayed(
+            Runnable {
+                /**
+                 * 延时执行的代码
+                 */
+
+                if (true == outputDirectory.listFiles()?.isNotEmpty()) {
+                    Navigation.findNavController(
+                        requireActivity(), R.id.fragment_containers
+                    ).navigate(
+                        CameraFragmentDirections
+                            .actionCameraToGallery(outputDirectory.absolutePath)
+                    )
+                }
+            }, 1000
+        ) // 延时1秒
+
+
         }
 
 
@@ -716,7 +770,7 @@ class CameraFragment : Fragment() {
 
     companion object {
 
-        private const val TAG = "CameraXBasic"
+        private const val TAG = "智评"
         private const val FILENAME = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val PHOTO_EXTENSION = ".jpg"
         private const val RATIO_4_3_VALUE = 4.0 / 3.0

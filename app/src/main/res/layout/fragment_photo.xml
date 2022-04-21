@@ -39,7 +39,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="500dp">
+        android:layout_height="500dp"
+        android:scrollbars="none">
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -107,6 +108,27 @@
             android:padding="10dp"
             android:text="@string/photo_detail23"
             android:textColor="@color/black" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/jump_to_camera"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="100dp"
+            android:clickable="true"
+            android:elevation="3dp"
+            android:focusable="auto"
+            android:gravity="center"
+            android:text="开始拍照"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#3A8FFF"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:qmui_backgroundColor="@color/white"
+            app:qmui_borderColor="#3A8FFF"
+            app:qmui_borderWidth="3dp"
+            app:qmui_radius="10dp" />
     </LinearLayout>
     </ScrollView>
 <!--    <Button-->
@@ -117,26 +139,6 @@
 <!--        android:text="开始拍照"-->
 <!--        android:textAllCaps="false" />-->
 
-    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-        android:id="@+id/jump_to_camera"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="100dp"
-        android:clickable="true"
-        android:elevation="3dp"
-        android:focusable="auto"
-        android:gravity="center"
-        android:text="开始拍照"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#3A8FFF"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:qmui_backgroundColor="@color/white"
-        app:qmui_borderColor="#3A8FFF"
-        app:qmui_borderWidth="3dp"
-        app:qmui_radius="10dp" />
 
     <!--    app:qmui_shadowAlpha="0.15"-->
 <!--    app:qmui_shadowElevation="14dp"-->
