@@ -27,8 +27,6 @@ private FragmentPhotoBinding binding;
         return root;
     }
     private void initview(){
-        View root = binding.getRoot();
-        root.getBackground().setAlpha(50);//0~255透明度值 0：全透明；255不透明
         final TextView detail1 = binding.detail1;
         detail1.setText("\u3000\u3000"+"本项目针对传统托槽粘接教学训练中“训练教具种类单一、评估指标依赖主观、评估方式耗时耗力”三大痛点，研发具备“训练病例多元化、评分体系标准化、评估流程自动化”特点的托槽粘接教学训练系统，以期突破传统教学模式限制，推动口腔医学教育改革发展。");
         QMUIRoundButton jump_to_camera = binding.jumpToCamera;

@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
-        android:background="@drawable/bg"
+        android:background="@drawable/backgroud"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:scrollbars="none">
@@ -33,6 +33,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--类型、时间、分数-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -84,6 +85,7 @@
                     app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!--图像裁剪后的图片-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,10 +94,23 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/a_his_pic"
+                android:id="@+id/a_his_pic_cut"
                 android:layout_width="match_parent"
                 android:layout_height="103dp"
-                android:src="@drawable/v2_r9haow" />
+                android:src="@drawable/bg" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="参考线识别结果："
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/a_his_pic_line"
+                android:layout_width="match_parent"
+                android:layout_height="103dp"
+                android:src="@drawable/bg" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,14 +119,262 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
+            <!--得分十字-->
             <com.android.example.cameraxbasic.ui.historical.ScoreDetail
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
-            <com.bin.david.form.core.SmartTable
+            <!--得分表格-->
+            <TableLayout
                 android:id="@+id/a_his_table_score"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/table_line_h"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:showDividers="beginning|middle|end">
+
+                <!--表头-->
+                <TableRow
+                    android:background="@color/white"
+                    android:divider="@drawable/table_line_h"
+                    android:orientation="horizontal"
+                    android:showDividers="beginning|middle|end">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="牙位"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="67dp"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="近远中"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="67dp"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="垂直"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="67dp"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="轴倾角"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="得分"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:background="@color/white"
+                    android:divider="@drawable/table_line_h"
+                    android:showDividers="beginning|middle|end">
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="A3"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="-1" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="-1" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="8" />
+                </TableRow>
+
+                <TableRow
+                    android:background="@color/white"
+                    android:divider="@drawable/table_line_h"
+                    android:showDividers="beginning|middle|end">
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="A2"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="10" />
+                </TableRow>
+
+                <TableRow
+                    android:background="@color/white"
+                    android:divider="@drawable/table_line_h"
+                    android:showDividers="beginning|middle|end">
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="A1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="10" />
+                </TableRow>
+
+
+                <TableRow
+                    android:background="@color/white"
+                    android:divider="@drawable/table_line_h"
+                    android:showDividers="beginning|middle|end">
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="B1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="10" />
+                </TableRow>
+
+
+                <TableRow
+                    android:background="@color/white"
+                    android:divider="@drawable/table_line_h"
+                    android:showDividers="beginning|middle|end">
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="B2"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="10" />
+                </TableRow>
+
+
+                <TableRow
+                    android:background="@color/white"
+                    android:divider="@drawable/table_line_h"
+                    android:showDividers="beginning|middle|end">
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="B3"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="0" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="10" />
+                </TableRow>
+            </TableLayout>
 
             <TextView
                 android:layout_width="wrap_content"

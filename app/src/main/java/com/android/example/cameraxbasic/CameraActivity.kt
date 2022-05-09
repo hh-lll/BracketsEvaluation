@@ -17,13 +17,12 @@
 
 package com.android.example.cameraxbasic
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.View
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -49,8 +48,11 @@ class CameraActivity : AppCompatActivity() {
 
         //隐藏导航栏
         supportActionBar?.hide()
+
+//        requestWindowFeature(Window.FEATURE_NO_TITLE)
         activityCameraBinding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(activityCameraBinding.root)
+
     }
 
     override fun onResume() {
