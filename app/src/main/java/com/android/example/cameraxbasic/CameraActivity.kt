@@ -33,7 +33,7 @@ import java.io.File
 
 const val KEY_EVENT_ACTION = "key_event_action"
 const val KEY_EVENT_EXTRA = "key_event_extra"
-private const val IMMERSIVE_FLAG_TIMEOUT = 500L
+private const val IMMERSIVE_FLAG_TIMEOUT = 100L
 
 /**
  * Main entry point into our app. This app follows the single-activity pattern, and all
@@ -47,7 +47,7 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //隐藏导航栏
-        supportActionBar?.hide()
+//        supportActionBar?.hide()
 
 //        requestWindowFeature(Window.FEATURE_NO_TITLE)
         activityCameraBinding = ActivityCameraBinding.inflate(layoutInflater)
@@ -59,9 +59,9 @@ class CameraActivity : AppCompatActivity() {
         super.onResume()
         // Before setting full screen flags, we must wait a bit to let UI settle; otherwise, we may
         // be trying to set app to immersive mode before it's ready and the flags do not stick
-        activityCameraBinding.fragmentContainers.postDelayed({
+//        activityCameraBinding.fragmentContainers.postDelayed({
             hideSystemUI()
-        }, IMMERSIVE_FLAG_TIMEOUT)
+//        }, IMMERSIVE_FLAG_TIMEOUT)
     }
 
     //监听手机屏幕上的按键
@@ -104,7 +104,7 @@ class CameraActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, activityCameraBinding.fragmentContainers).let { controller ->
             controller.hide(WindowInsetsCompat.Type.systemBars())
-//            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
     }
 }
